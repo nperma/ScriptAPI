@@ -1,7 +1,7 @@
 import {world,system}from"@minecraft/server";
 
 export class CMD {
-  @CommandHandler
+ 
   constructor(){
     this.register = [];
     this.prefix = ["+",".","!","?"];
