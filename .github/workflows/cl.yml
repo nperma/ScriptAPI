@@ -15,13 +15,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: npm install
-        run: |
-          pwd && npm install
-          find ./scripts/* -maxdepth 2 -name package.json -execdir sh -c 'pwd && npm install' \;
-          find ./docs/* -maxdepth 5 -name package.json -execdir sh -c 'pwd && npm install' \;
+      - run: npm install
 
       - name: Type Check
         run: tsc --build
@@ -34,7 +30,7 @@ jobs:
       - name: Create Pull Request
         if: ${{ github.event_name == 'schedule' }}
         id: cpr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.JAYLYBOT_TOKEN }}
           push-to-fork: jayly-bot/ScriptAPI
